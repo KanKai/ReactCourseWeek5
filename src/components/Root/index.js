@@ -7,7 +7,8 @@ import stores from "stores";
 import { PrivacyRequest } from "helpers/request";
 import { actionTypes } from "stores/actions";
 
-function Root(props) { // props = {user: {}, post: {}, setPrivacies: () => {}}
+function Root(props) {
+  // props = {user: {}, post: {}, setPrivacies: () => {}}
   useEffect(() => {
     // stores.subscribe(() => {
     //   const state = stores.getState();
@@ -20,16 +21,14 @@ function Root(props) { // props = {user: {}, post: {}, setPrivacies: () => {}}
     });
   }, []);
   useEffect(() => {
-    console.log('Post is changed', props.post);
+    console.log("Post is changed", props.post);
   }, [props.post]);
   return (
     // <Provider store={stores}>
     <Router history={history}>
-      <Switch>
-        <CustomRoute />
-        {/* <NonAukthRoute /> */}
-        {/* <Route component={() => <h1>paragraph</h1>} /> */}
-      </Switch>
+      <CustomRoute />
+      {/* <NonAukthRoute /> */}
+      {/* <Route component={() => <h1>paragraph</h1>} /> */}
     </Router>
     // </Provider>
   );
