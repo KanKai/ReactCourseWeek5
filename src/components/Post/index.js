@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Segment from "components/Segment";
 import ViewFlex from "components/ViewFlex";
 import ProfileImage from "components/ProfileImage";
@@ -59,6 +59,48 @@ function Post({ data = initialData }) {
     privacy,
     text
   } = data;
+  const [x, setX] = useState(null);
+  const [y, setY] = useState(null);
+  const [isToolTip, setToolTip] = useState(false);
+  const textRef = useRef();
+  const tooltipRef = useRef();
+  // function onMouseEnter() {
+  //   const {style, offsetTop:y, offsetLeft:x, clientHeight, clientWidth} = textRef.current;
+  //   console.log('x', x, 'y', y);
+  //   setToolTip(true);
+  //   setY(y);
+  //   setX(x);
+  //   // console.log(tooltipRef);
+  //   tooltipRef.current.style.left = x+'px';
+  //   tooltipRef.current.style.top = y-10+'px';
+  //   alert(`Width ${clientWidth}, Height ${clientHeight}`);
+  //   style.color = 'red';
+  // }
+  function onMouseOver() {
+    const {
+      style,
+      offsetTop: y,
+      offsetLeft: x,
+      clientHeight,
+      clientWidth
+    } = textRef.current;
+    console.log("x", x, "y", y);
+    setToolTip(true);
+    setY(y);
+    setX(x);
+    // console.log(tooltipRef);
+    tooltipRef.current.style.left = x + "px";
+    tooltipRef.current.style.top = y - 10 + "px";
+    // alert(`Width ${clientWidth}, Height ${clientHeight}`);
+    style.color = "red";
+  }
+  function onMouseOut() {
+    console.log("mouse out");
+  }
+
+  function onMouseLeave() {
+    console.log("mouse leave");
+  }
   return (
     <Segment
       // title="โพสต์"
@@ -68,8 +110,19 @@ function Post({ data = initialData }) {
         // <ShareAction />
       ]}
     >
+      <span
+        ref={tooltipRef}
+        hidden={!isToolTip}
+        style={{ position: "absolute", left: 0, top: 0 }}
+      >
+        x: {x} y: {y}
+      </span>
       <ViewFlex column>
-        <div className="postHeader">
+        <div
+          className="postHeader"
+          onMouseLeave={onMouseLeave}
+          onMouseOut={onMouseOut}
+        >
           <ViewFlex margin={false}>
             <ViewFlex className="profileImage">
               <ProfileImage size="x2" />
@@ -77,7 +130,7 @@ function Post({ data = initialData }) {
             <ViewFlex column className="right">
               <div className="username">{`${fristName} ${lastName}`}</div>
               <div>
-                <span classNam="privacy">
+                <span className="privacy">
                   {privacy && <div>{privacy.name}</div>}
                 </span>
                 <span className="createdAt">
@@ -89,7 +142,12 @@ function Post({ data = initialData }) {
         </div>
         <div className="postText">
           <div>
-            <h2>{text}</h2>
+            <h2
+              ref={textRef}
+              // onMouseOver={onMouseOver}
+            >
+              {text}
+            </h2>
           </div>
         </div>
       </ViewFlex>

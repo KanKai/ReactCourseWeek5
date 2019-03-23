@@ -5,10 +5,11 @@ import reducers from "./reducers";
 
 const mw = [
   ...middlewares
-]
+]// mw = [mw1, mw2, mw3, mwn]
+
 const store = createStore(
   combineReducers(reducers),
-  composeWithDevTools(applyMiddleware(...mw))
+  composeWithDevTools(applyMiddleware(...mw)) // applayMiddleware(mw1, mw2, mw3, mwn);
 );
 
 export default store;
