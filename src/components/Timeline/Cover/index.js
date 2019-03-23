@@ -12,6 +12,7 @@ function CoverImage({ src }) {
   const coverRef = useRef();
   const imgRef = useRef();
   const [bluring, setBluring] = useState(true);
+  const [moveImageActive, setMoveImageActive] = useState(false);
   useEffect(() => {
     usePreload(src)
       .then(result => {
@@ -30,9 +31,13 @@ function CoverImage({ src }) {
   function onDragEnd() {
     console.log("drag end");
   }
+
+  function moveImage() {
+    setMoveImageActive(true);
+  }
   return (
     <Dragable
-      active={false}
+      active={moveImageActive}
       dragRef={coverRef}
       onDrag={onDrag}
       onDragEnd={onDragEnd}
@@ -50,7 +55,7 @@ function CoverImage({ src }) {
         </div>
         {imagePath && (
           <img
-            className={classnames({ bluring })}
+            className={classnames({ bluring: !moveImageActive })}
             ref={imgRef}
             draggable={false}
             src={imagePath}
