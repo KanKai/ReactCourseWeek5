@@ -15,13 +15,14 @@
 }
 
 .postAction {
-  margin: -8px 0;
+  margin: -8px -13px;
   .postButton {
     cursor: pointer;
     display: flex;
     flex: 1;
     background-color: #dcdcdc;
     padding: 10px 10px;
+    line-height: 100%;
     justify-content: center; // horizontal
     align-items: center; // vertical
     transition: all 0.03s ease-in-out;
@@ -32,8 +33,4 @@
       filter: brightness(0.98);
     }
   }
-}
-
-.actionItem {
-  margin: -13px;
 }

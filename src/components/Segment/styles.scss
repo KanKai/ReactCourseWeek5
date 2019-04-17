@@ -1,5 +1,7 @@
 .segment {
   min-width: 100px;
+  margin-bottom: 20px;
+  border: 1px solid #dadada;
   .title {
     padding: 14px;
     background-color: #f1f0f0;
@@ -24,11 +26,11 @@
     border-bottom: 2px solid #dcdcdc;
   }
   .actionsWrapper {
-    background-color: #ebebeb;
-    .container {
+    .actionContainer {
       flex-direction: column;
       .actionItem {
-        padding: 8px 0;
+        background-color: #ebebeb;
+        padding: 8px 13px;
       }
     }
   }

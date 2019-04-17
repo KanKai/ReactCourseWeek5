@@ -1,6 +1,7 @@
 import React from "react";
 import TimelineHeader from "components/Timeline/Header";
 import PostSection from 'components/PostSection';
+import Post from 'components/Post';
 import { Row, Col } from "antd";
 function TimelineContainer() {
   const data = {
@@ -18,6 +19,9 @@ function TimelineContainer() {
         <Col span={16}>
           <div>
             <PostSection />
+          </div>
+          <div>
+            <Post />
           </div>
         </Col>
       </Row>

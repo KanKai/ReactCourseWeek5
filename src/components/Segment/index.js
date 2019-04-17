@@ -5,7 +5,7 @@ import "./styles.scss";
 function renderActions(actions) {
   return (
     <div className="actionsWrapper">
-      <div className="container">
+      <div className="actionContainer">
         {actions.map(action => (
           <SegmentAction>{action}</SegmentAction>
         ))}
