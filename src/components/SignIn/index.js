@@ -49,7 +49,9 @@ function gotoSignUp() {
 
 function SignIn({onLogin}) {
   if(typeof onLogin !== 'function'){
-    onLogin = function(){}
+    onLogin = () => () => {} 
+    // เป็นค่าเริ่มต้น เพื่อที่จะสามารถให้ onclick 
+    // สามารถทำงานได้ ปรกติแม้ไม่ได้ใส่ function เข้ามาใน onLogin
   }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

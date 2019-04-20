@@ -14,28 +14,34 @@ function Authorization({ match, location, history }) {
   // console.log("match", match);
   // console.log("location", location);
   // console.log("history", history);
-  let redirectTo = `${location.pathname}${location.search}`;
-  if (redirectTo === window.location.pathname) return <></>;
+  // let redirectTo = `${location.pathname}${location.search}`;
   if (loggedIn) {
     switch (location.pathname) {
       case "/":
       case "/signin":
       case "/signup": {
-        redirectTo = "/timeline";
+        return <Redirect to="/timeline" />;
       }
     }
   } else {
-    redirectTo = "/signin";
+    switch (location.pathname) {
+      case "/signin":
+        return <Login />;
+      case "/signup": {
+        return <Register />;
+      }
+      default:
+        return <Login />;
+    }
   }
-  return <Redirect to={redirectTo} />;
 }
 
 function CustomRoute() {
   return (
     <Switch>
-      <Route path="/" component={Authorization} />
-      <Route exact path="/signin" component={Login} />
-      <Route exact path="/signup" component={Register} />
+      <Route exact path="/" component={Authorization} />
+      <Route exact path="/signin" component={Authorization} />
+      <Route exact path="/signup" component={Authorization} />
       <Layout>
         <Switch>
           <Route exact path="/timeline/:id?" component={Timeline} />
