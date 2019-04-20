@@ -4,11 +4,35 @@ import Timeline from "containers/Timeline";
 import Layout from "components/Layout";
 import Login from "containers/Login";
 import Register from "containers/Register";
+import { token } from "helpers/util";
+function isLoggedIn() {
+  return token.hasToken();
+}
 
-function AuthRoute() {
+function Authorization({ match, location, history }) {
+  const loggedIn = isLoggedIn();
+  // console.log("match", match);
+  // console.log("location", location);
+  // console.log("history", history);
+  let redirectTo = `${location.pathname}${location.search}`;
+  if (loggedIn) {
+    switch (location.pathname) {
+      case "/":
+      case "/signin":
+      case "/signup": {
+        redirectTo = "/timeline";
+      }
+    }
+  }else {
+    redirectTo = '/signin';
+  }
+  return <Redirect to={redirectTo} />;
+}
+
+function CustomRoute() {
   return (
     <Switch>
-      <Route exact path="/" component={() => <Redirect to="/signin" />} />
+      <Route path="/" component={Authorization} />
       <Route exact path="/signin" component={Login} />
       <Route exact path="/signup" component={Register} />
       <Layout>
@@ -21,4 +45,4 @@ function AuthRoute() {
   );
 }
 
-export default AuthRoute;
+export default CustomRoute;

@@ -47,7 +47,10 @@ function gotoSignUp() {
   history.push('/signup');
 }
 
-function SignIn() {
+function SignIn({onLogin}) {
+  if(typeof onLogin !== 'function'){
+    onLogin = function(){}
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const inputFields = [
@@ -73,7 +76,7 @@ function SignIn() {
         {renderForm(inputFields)}
         <Row>
           <Col span={12} className="col">
-            <Button block type="primary">
+            <Button block type="primary" onClick={onLogin(email, password)}>
               Sign in
             </Button>
           </Col>

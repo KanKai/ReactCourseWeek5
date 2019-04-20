@@ -1,6 +1,6 @@
 const endpoints = {
-  baseURI: "http://localhost:3333",
-  baseAPI: "http://localhost:3333"
+  baseURI: "http://34.74.91.102",
+  baseAPI: "http://34.74.91.102"
 };
 
 function ReqError(message, status) {
@@ -17,10 +17,11 @@ function ReqError(message, status) {
 //   response: {error: {message: "", status:404}}
 // }
 
-const handleError = response => {
+const handleError = async response => {
   if (!response.ok) {
-    const message = response.message;
-    throw new ReqError(message, response.status);
+    const res = await response.json();
+    const {message, statusCode} = res;
+    throw new ReqError(message, statusCode);
   }
   return response;
 };
@@ -31,10 +32,11 @@ const handleResponse = async response => {
 };
 
 const handleErrorElse = async err => {
-  console.log(err);
-  if (!err.hasOwnProperty("response")) {
+  console.log('handle error else', err);
+  if (!('response' in err)) {
     throw new ReqError(err, 400);
   }
+  throw err;
 };
 
 const fetchAPI = (
@@ -49,7 +51,8 @@ const fetchAPI = (
       "Content-Type": "application/json",
       ...headers
     },
-    body
+    // body
+    body: JSON.stringify(body)
   })
     .then(handleError)
     .then(handleResponse)
