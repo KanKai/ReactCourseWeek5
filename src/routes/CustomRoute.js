@@ -15,6 +15,7 @@ function Authorization({ match, location, history }) {
   // console.log("location", location);
   // console.log("history", history);
   let redirectTo = `${location.pathname}${location.search}`;
+  if (redirectTo === window.location.pathname) return <></>;
   if (loggedIn) {
     switch (location.pathname) {
       case "/":
@@ -23,8 +24,8 @@ function Authorization({ match, location, history }) {
         redirectTo = "/timeline";
       }
     }
-  }else {
-    redirectTo = '/signin';
+  } else {
+    redirectTo = "/signin";
   }
   return <Redirect to={redirectTo} />;
 }

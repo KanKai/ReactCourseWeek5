@@ -4,7 +4,6 @@ import { Provider, connect } from "react-redux";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "routes/history";
 import stores from "stores";
-import { PrivacyRequest } from "helpers/request";
 import { actionTypes } from "stores/actions";
 
 function Root(props) {
@@ -14,11 +13,11 @@ function Root(props) {
     //   const state = stores.getState();
     //   console.log('Post is changed', state.post);
     // })
-    PrivacyRequest().then(result => {
-      // const dispatch = stores.dispatch;
-      // dispatch({ type: actionTypes.SET_PRIVACIES, payload: result });
-      props.setPrivacies(result);
-    });
+    // PrivacyRequest().then(result => {
+    //   // const dispatch = stores.dispatch;
+    //   // dispatch({ type: actionTypes.SET_PRIVACIES, payload: result });
+    //   props.setPrivacies(result);
+    // });
   }, []);
   useEffect(() => {
     console.log("Post is changed", props.post);
