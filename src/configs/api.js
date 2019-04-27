@@ -50,19 +50,23 @@ const fetchAPI = (
   headers = {}
 ) => {
   try {
-    const authToken = `Bearer ${token.getToken()}`;
-    if(!authToken) {
-      if(path !== pathEndpoints.LOGIN || path !== pathEndpoints.REGISTER){
+    let authToken = token.getToken();
+    if(!authToken) { // ถ้าไม่มี Token
+      if(path !== pathEndpoints.LOGIN && path !== pathEndpoints.REGISTER){
         alert("Token has expired: Error 403");
-        location.reload();
+        location.reload(); // reload เพื่อกลับไปหน้า login
         // throw new ReqError("Token has expired", 403);
       }
+    }else { 
+      // ถ้ามี token ใส่ Bearer เข้าไปด้านหน้าของ Token 
+      // แล้วใส่เข้าไปใน headers.Authorization
+      headers.Authorization = `Bearer ${authToken}`;
     }
     return fetch(`${endpoints.baseAPI}${path}`, {
       method,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": authToken,
+        // ถ้ามี token จะใส่มากับ headers object
         ...headers
       },
       // body
