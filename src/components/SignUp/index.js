@@ -5,27 +5,6 @@ import Input from "components/Input";
 import { API } from "configs";
 import "./styles.scss";
 
-function onSigin(username, password) {
-  return async function(e) {
-    e.preventDefault();
-    try {
-      const result = await API.fetchAPI(
-        `/users?username=${username}&password=${password}`
-      );
-      console.log(result);
-      if (result.length > 0) {
-        alert("LogedIn :)");
-      } else {
-        alert("Username or password incorrect!!!");
-      }
-    } catch (err) {
-      if (err.hasOwnProperty("response")) {
-        alert(err.response.error.message);
-      }
-    }
-  };
-}
-
 const onChange = setter => e => {
   const { value } = e.target;
   setter(value);
@@ -87,7 +66,7 @@ function SignUp() {
     <div className="signInContainer">
       <h2>Sign up</h2>
       <hr />
-      <form onSubmit={onSigin(email, password)}>
+      <form>
         {renderForm(inputFields)}
         <Row>
           <Col className="col">

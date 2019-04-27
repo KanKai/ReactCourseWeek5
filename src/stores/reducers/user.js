@@ -1,15 +1,18 @@
-const initialState = {
-  data: [1,2,3]
-}
+import { actionTypes } from "stores/actions";
+
+const initialState = {};
 
 export default (state = initialState, action) => {
-  switch(action.type) {
-    // case 'SET_USER_INFOMATION': {
-    //   const newState = {...state}
-    //   const newAdd = newState.data.reduce((acc, cur) => acc + cur, 0);
-    //   newState.data.push(newAdd);
-    //   return newState;
-    // }
-    default: return state;
+  switch (action.type) {
+    case actionTypes.SET_USER_INFOMATION: {
+      const newState = {
+        ...state,
+        ...action.payload
+      };
+      console.log("New state", newState);
+      return newState;
+    }
+    default:
+      return state;
   }
-}
+};

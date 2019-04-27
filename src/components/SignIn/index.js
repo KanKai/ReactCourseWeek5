@@ -22,27 +22,6 @@ function renderForm(inputFields) {
   ));
 }
 
-function onSigin(email, password) {
-  return async function(e) {
-    e.preventDefault();
-    try {
-      const result = await API.fetchAPI(
-        `/users?email=${email}&password=${password}`
-      );
-      console.log(result);
-      if (result.length > 0) {
-        alert("LogedIn :)");
-      } else {
-        alert("Email or password incorrect!!!");
-      }
-    } catch (err) {
-      if (err.hasOwnProperty("response")) {
-        alert(err.response.error.message);
-      }
-    }
-  };
-}
-
 function gotoSignUp() {
   history.push('/signup');
 }
@@ -74,7 +53,8 @@ function SignIn({onLogin}) {
     <div className="signInContainer">
       <h2>Sign in</h2>
       <hr />
-      <form onSubmit={onSigin(email, password)}>
+      {/* <form onSubmit={onLogin(email, password)}> */}
+      <form>
         {renderForm(inputFields)}
         <Row>
           <Col span={12} className="col">

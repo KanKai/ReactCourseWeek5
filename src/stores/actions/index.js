@@ -1,5 +1,10 @@
 import actionTypes from './actionTypes';
+import users from './users';
 
 export {
-  actionTypes
+  actionTypes,
+}
+
+export default {
+  users
 }

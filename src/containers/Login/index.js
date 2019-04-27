@@ -18,4 +18,4 @@ const onLogin = (email, password) => () => {
   });
 }
 
-export default LoginContainer;
+export default (LoginContainer);

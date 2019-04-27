@@ -1,4 +1,5 @@
 const userActionType = {
+  SET_USER_INFOMATION: "SET_USER_INFOMATION"
 }
 
 const postActionType = {

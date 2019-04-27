@@ -14,6 +14,20 @@ const login = (identifier, password, cb) => {
   })
 };
 
+// const me = (cb) => {
+//   API.fetchAPI(endpoints.ME).then((res) => {
+//     cb(res)
+//   })
+// }
+
+const me = () => {
+  return API.fetchAPI(endpoints.ME);
+}
+// const me = async () => {
+//   return await API.fetchAPI(endpoints.ME);
+// }
+
 export default {
-  login
+  login,
+  me
 };

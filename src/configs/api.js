@@ -1,3 +1,7 @@
+import {token} from 'helpers/util'
+import pathEndpoints from 'requests/endpoints';
+// import history from 'routes/history'
+
 const endpoints = {
   baseURI: "http://34.74.91.102",
   baseAPI: "http://34.74.91.102"
@@ -45,18 +49,30 @@ const fetchAPI = (
   body = undefined,
   headers = {}
 ) => {
-  return fetch(`${endpoints.baseAPI}${path}`, {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      ...headers
-    },
-    // body
-    body: JSON.stringify(body)
-  })
-    .then(handleError)
-    .then(handleResponse)
-    .catch(handleErrorElse);
+  try {
+    const authToken = `Bearer ${token.getToken()}`;
+    if(!authToken) {
+      if(path !== pathEndpoints.LOGIN || path !== pathEndpoints.REGISTER){
+        alert("Token has expired: Error 403");
+        location.reload();
+        // throw new ReqError("Token has expired", 403);
+      }
+    }
+    return fetch(`${endpoints.baseAPI}${path}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": authToken,
+        ...headers
+      },
+      // body
+      body: JSON.stringify(body)
+    })
+      .then(handleError)
+      .then(handleResponse)
+  } catch (error) {
+    handleErrorElse(error);
+  }
 };
 
 export default { fetchAPI };
