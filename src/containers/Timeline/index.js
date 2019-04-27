@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import actions from "stores/actions";
 
 import requests from 'requests';
+import {Helmet} from 'react-helmet';
+
 import TimelineHeader from "components/Timeline/Header";
 import PostSection from "components/PostSection";
 import Post from "components/Post";

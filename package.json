@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "json-server": "json-server --watch ./json-server/db.js --port 3333",
-    "dev": "webpack-dev-server --config=./webpack/config.dev.js --hot --inline",
-    "build": "webpack --config=./webpack/config.prod.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config=./webpack/config.dev.js --hot --inline",
+    "build": "cross-env NODE_ENV=production webpack --config=./webpack/config.prod.js",
     "storybook": "start-storybook -c ./src/.stories -p 3001"
   },
   "dependencies": {
@@ -37,8 +37,10 @@
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "4.29.4",
     "webpack-cli": "3.2.3",
-    "webpack-dev-server": "3.1.14"
+    "webpack-dev-server": "3.1.14",
+    "webpack-merge": "^4.2.1"
   }
 }
